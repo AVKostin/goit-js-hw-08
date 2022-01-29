@@ -21,3 +21,15 @@ player
         break;
     }
   });
+
+player
+  .setVolume(0.02)
+  .then(function (volume) {})
+  .catch(function (error) {
+    switch (error.name) {
+      case 'RangeError':
+        break;
+      default:
+        break;
+    }
+  });
