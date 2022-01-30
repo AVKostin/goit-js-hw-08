@@ -15,7 +15,7 @@ function updateOutput() {
 		}
 	}
 }
-const onTextAreaInput = e => {
+const onTextareaInput = e => {
 	formData[e.target.name] = e.target.value;
 	localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 };
@@ -26,8 +26,8 @@ const inputValue = e => {
 		return alert('Внимательно заполните все поля!');
 	}
 	console.log(formData);
-	e.currentTarget.reset();
+	e.target.reset();
 	localStorage.removeItem(STORAGE_KEY);
 };
 formRef.addEventListener('submit', inputValue);
-formRef.addEventListener('input', throttle(onTextAreaInput, 500));
+formRef.addEventListener('input', throttle(onTextareaInput, 500));
