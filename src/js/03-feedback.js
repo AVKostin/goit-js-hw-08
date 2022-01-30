@@ -15,7 +15,6 @@ function updateOutput() {
 		}
 	}
 }
-
 const onTextAreaInput = e => {
 	formData[e.target.name] = e.target.value;
 	localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
@@ -24,7 +23,7 @@ const onTextAreaInput = e => {
 const inputValue = e => {
 	e.preventDefault();
 	if (formRef.email.value === '' || formRef.message.value === '') {
-		return alert('Все поля должны быть заполнены!');
+		return alert('Внимательно заполните все поля!');
 	}
 	console.log(formData);
 	e.currentTarget.reset();
