@@ -2,35 +2,33 @@ import throttle from 'lodash.throttle';
 import '../css/common.css';
 import '../css/03-feedback.css';
 const formRef = document.querySelector('.feedback-form');
-const emailRef = formRef.elements.email;
-const messageRef = formRef.elements.message;
 const STORAGE_KEY = 'feedback-form-state';
-const dataForm = {};
-
+let formData = {};
 updateOutput();
+
 function updateOutput() {
-	try {
-		const getFormState = localStorage.getItem(STORAGE_KEY);
-		const parsedGetFormState = JSON.parse(getFormState);
-		emailRef.value = `${parsedGetFormState.email}`;
-		messageRef.value = `${parsedGetFormState.message}`;
-	} catch (error) {}
+	const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+	for (const key in savedData) {
+		if (key) {
+			formRef[key].value = savedData[key];
+			formData = savedData;
+		}
+	}
 }
-const onSubmit = e => {
+
+const onTextAreaInput = e => {
+	formData[e.target.name] = e.target.value;
+	localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+};
+
+const inputValue = e => {
 	e.preventDefault();
-	if (emailRef.value === '' || messageRef.value === '') {
+	if (formRef.email.value === '' || formRef.message.value === '') {
 		return alert('Все поля должны быть заполнены!');
 	}
-	console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
+	console.log(formData);
 	e.currentTarget.reset();
 	localStorage.removeItem(STORAGE_KEY);
 };
-const inputValue = () => {
-	if (emailRef.value !== '' || messageRef.value !== '') {
-		(dataForm.email = emailRef.value), (dataForm.message = messageRef.value);
-	}
-	localStorage.setItem(STORAGE_KEY, JSON.stringify(dataForm));
-};
-emailRef.addEventListener('input', throttle(inputValue, 500));
-messageRef.addEventListener('input', throttle(inputValue, 500));
-formRef.addEventListener('submit', onSubmit);
+formRef.addEventListener('submit', inputValue);
+formRef.addEventListener('input', throttle(onTextAreaInput, 500));
