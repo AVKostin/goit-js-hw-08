@@ -1,7 +1,7 @@
 import throttle from 'lodash.throttle';
 const formRef = document.querySelector('.feedback-form');
-const email = formRef.email;
-const message = formRef.message;
+const email = document.querySelector('.feedback-form input');
+const message = document.querySelector('.feedback-form textarea');
 const STORAGE_KEY = 'feedback-form-state';
 updateOutput();
 
@@ -10,9 +10,8 @@ function updateOutput() {
 	if (!parseStorageKey) {
 		return;
 	}
-	if (parseStorageKey.email || parseStorageKey.message)
-		(formRef.email.value = parseStorageKey.email),
-			(formRef.message.value = parseStorageKey.message);
+	formRef.email.value = parseStorageKey.email || '';
+	formRef.message.value = parseStorageKey.message || '';
 }
 
 const onTextInput = () => {
