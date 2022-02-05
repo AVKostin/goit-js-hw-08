@@ -5,7 +5,8 @@ const refs = {
 	message: document.querySelector('.feedback-form textarea'),
 };
 const STORAGE_KEY = 'feedback-form-state';
-const formData = {
+
+let formData = {
 	email: refs.email.value,
 	message: refs.message.value,
 };
@@ -13,10 +14,12 @@ updateOutput();
 
 function updateOutput() {
 	const parseStorageKey = JSON.parse(localStorage.getItem(STORAGE_KEY));
-	if (parseStorageKey) {
-		refs.email.value = parseStorageKey.email || '';
-		refs.message.value = parseStorageKey.message || '';
+	if (!parseStorageKey) {
+		return;
 	}
+	refs.email.value = parseStorageKey.email || '';
+	refs.message.value = parseStorageKey.message || '';
+	formData = parseStorageKey;
 }
 
 const onTextInput = e => {
