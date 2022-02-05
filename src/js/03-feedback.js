@@ -20,12 +20,6 @@ function updateOutput() {
 }
 
 const onTextInput = e => {
-	// console.log(
-	// 	'JSON.parse(localStorage.getItem(STORAGE_KEY)): ',
-	// 	JSON.parse(localStorage.getItem(STORAGE_KEY)),
-	// );
-	// const formData = { ...JSON.parse(localStorage.getItem(STORAGE_KEY)) };
-
 	console.log(formData);
 	formData[e.target.name] = e.target.value;
 	localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
