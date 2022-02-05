@@ -23,7 +23,6 @@ function updateOutput() {
 }
 
 const onTextInput = e => {
-	console.log(formData);
 	formData[e.target.name] = e.target.value;
 	localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 };
@@ -31,16 +30,14 @@ const onTextInput = e => {
 const onFormSubmit = e => {
 	e.preventDefault();
 
-	if (refs.form.email.value === '' || refs.form.message.value === '') {
+	if (formData.email === '' || formData.message === '') {
 		return alert('Внимательно заполните все поля!');
 	}
-	const formDataInput = {
-		email: e.currentTarget.email.value,
-		massage: e.currentTarget.message.value,
-	};
-	console.log(formDataInput);
+	console.log(formData);
 	e.target.reset();
 	localStorage.removeItem(STORAGE_KEY);
+	formData.email = '';
+	formData.message = '';
 };
 refs.form.addEventListener('input', throttle(onTextInput, 500));
 refs.form.addEventListener('submit', onFormSubmit);
