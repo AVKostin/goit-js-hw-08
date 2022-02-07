@@ -5,7 +5,8 @@ const message = formRef.message;
 
 const STORAGE_KEY = 'feedback-form-state';
 updateOutput();
-let formData = {
+
+const formData = {
 	email: email.value,
 	message: message.value,
 };
@@ -31,7 +32,8 @@ const onFormSubmit = e => {
 	console.log(formData);
 	e.currentTarget.reset();
 	localStorage.removeItem(STORAGE_KEY);
-	formData = {};
+	formData.email = '';
+	formData.message = '';
 };
 
 formRef.addEventListener('input', throttle(onTextInput, 500));
