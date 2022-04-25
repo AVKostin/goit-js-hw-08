@@ -9,9 +9,9 @@ const itemGalleryMarkup = createGalleryMarkup(galleryItems);
 galleryRef.insertAdjacentHTML('beforeend', itemGalleryMarkup);
 
 function createGalleryMarkup(galleryItems) {
-  return galleryItems
-    .map(({ preview, original, description }) => {
-      return `
+	return galleryItems
+		.map(({ preview, original, description }) => {
+			return `
 			<a class="gallery__link" href="${original}">
 				<img
                     class="gallery__image"
@@ -19,11 +19,11 @@ function createGalleryMarkup(galleryItems) {
                         alt="${description}"
 				/>
 			</a>`;
-    })
-    .join('');
+		})
+		.join('');
 }
 new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
+	captionsData: 'alt',
+	captionDelay: 250,
 });
 // lightbox.on('show.simplelightbox', function () {});
